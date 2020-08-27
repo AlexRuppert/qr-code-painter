@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "parcel serve src/index.pug",
     "build": "parcel build src/index.pug",
-    "deploy": "parcel build src/index.pug",
+    "deploy": "parcel build src/index.pug --public-url \"./\"",
     "gh": "node publish.js"
   },
   "devDependencies": {
