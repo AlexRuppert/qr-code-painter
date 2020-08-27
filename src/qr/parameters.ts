@@ -30,7 +30,7 @@ export enum QrModes {
 
 function getMode(content: string) {
   if (/^\d*$/.test(content)) return QrModes.Numeric
-  if (/^[0-9A-Z \$%\*\+\-\.\/:]*$/.test(content)) return QrModes.Numeric
+  if (/^[0-9A-Z \$%\*\+\-\.\/:]*$/.test(content)) return QrModes.Alphanumeric
   return QrModes.Byte
 }
 

@@ -89,7 +89,6 @@ export class Encoder {
       content.length,
       this.config.characterCountBits,
     )
-    console.log(mode + countIndicator)
     return mode + countIndicator
   }
   suffix() {

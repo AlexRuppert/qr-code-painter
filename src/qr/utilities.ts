@@ -78,3 +78,15 @@ export function iterateOverMatrix(
     fnSecondary(y, matrix)
   }
 }
+
+export function debounce(fn: () => void, wait: number) {
+  let timer: number | undefined
+  return function () {
+    const later = () => {
+      timer = undefined
+      fn()
+    }
+    clearTimeout(timer)
+    timer = setTimeout(later, wait)
+  }
+}

@@ -43,3 +43,7 @@ export function render(canvas: HTMLElement, matrix: boolean[][]) {
   }
   canvas.appendChild(g)
 }
+
+export function clear(canvas: HTMLElement) {
+  canvas.innerHTML = ''
+}

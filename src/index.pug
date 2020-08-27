@@ -5,8 +5,10 @@ html(lang='en')
     link(rel='stylesheet' href='style/index.styl')
     title Document
   body
-    h1
-      | QR
+    .horizontal
+      input#input(type='text' placeholder='Enter text here...')
+      button#clear Clear
+      button#paste Paste
 
     svg#canvas(viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg')
     script(src='index.ts') 

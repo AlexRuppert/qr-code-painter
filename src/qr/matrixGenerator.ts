@@ -4,7 +4,6 @@ import { place } from './modulePlacement/placeModules'
 
 export default function getMatrix(content: string) {
   const config = getParameters(content)
-  console.dir(config)
   let bitString = EncoderFactory(config).encode(content)
   return place(config, bitString)
 }

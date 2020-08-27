@@ -1,14 +1,20 @@
 {
   "name": "qr-code-painter",
   "version": "1.0.0",
-  "main": "dist/index.html",
+  "main": "gh-pages/index.html",
   "license": "MIT",
+  "author": {
+    "name": "Alexander Ruppert"
+  },
   "scripts": {
     "dev": "parcel serve src/index.pug",
-    "build": "parcel build src/index.pug"
+    "build": "parcel build src/index.pug",
+    "deploy": "parcel build src/index.pug",
+    "gh": "node publish.js"
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^1.5.1",
+    "gh-pages": "^3.1.0",
     "parcel": "^2.0.0-beta.1",
     "prettier": "^2.0.5",
     "pug": "^3.0.0",

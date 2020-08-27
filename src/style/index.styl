@@ -1,9 +1,55 @@
 @import './reset'
 @import './typography'
 
+primaryColor = #3260a8
+hoverColor = lighten(primaryColor, 20%)
+activeColor = lighten(primaryColor, 40%)
+
+remove-background()
+  outline none
+  border none
+  border-radius 0
+  background none
+
+.horizontal
+  display flex
+  padding 0.5em 2em
+  width 100vw
+
+#input
+  margin 0.5em
+  padding 0.5em 1em
+  width 100%
+  remove-background()
+  border-bottom 2px solid primaryColor
+  font-size 1.2em
+  line-height 1em
+
+  &:hover
+    border-color hoverColor
+
+  &:active
+    border-color activeColor
+
+button
+  align-self center
+  padding 0.5em
+  color primaryColor
+  remove-background()
+  text-transform uppercase
+  font-weight 600
+  cursor pointer
+
+  &:hover
+    color hoverColor
+
+  &:active
+    color activeColor
+
 svg
-  padding 3em
-  height calc(100vh - 4em - 80px)
+  padding 5em
+  max-width 100vw
+  height calc(100vh - 4em)
 
 body
   display flex
