@@ -26,7 +26,7 @@ function createRect(container: SVGElement, position: Position, color: string) {
   container.appendChild(rect)
 }
 
-export function render(canvas: HTMLElement, matrix: boolean[][]) {
+export function render(canvas: SVGSVGElement, matrix: boolean[][]) {
   canvas.innerHTML = ''
   canvas.setAttribute(
     'viewBox',
@@ -44,6 +44,6 @@ export function render(canvas: HTMLElement, matrix: boolean[][]) {
   canvas.appendChild(g)
 }
 
-export function clear(canvas: HTMLElement) {
+export function clear(canvas: SVGSVGElement) {
   canvas.innerHTML = ''
 }

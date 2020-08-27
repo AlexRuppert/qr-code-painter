@@ -7,13 +7,14 @@ try {
   module.hot.accept()
 } catch (error) {}
 
-const canvas = document.getElementById('canvas') as HTMLElement
+const canvas = document.querySelector('svg') as SVGSVGElement
 const input = document.getElementById('input') as HTMLInputElement
 const pasteButton = document.getElementById('paste') as HTMLElement
 const clearButton = document.getElementById('clear') as HTMLElement
 clearButton.addEventListener('click', () => {
   input.value = ''
   input.focus()
+  createQr()
 })
 
 if (navigator.clipboard !== undefined) {
