@@ -41,4 +41,6 @@ const createQr = () => {
 }
 
 input.addEventListener('input', debounce(createQr, 350))
-input.focus()
+window.onload = () => {
+  input.focus()
+}

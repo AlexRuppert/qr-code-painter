@@ -1,11 +1,15 @@
+doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(name='Description' content='Tiny QR Code Generator')
     link(rel='stylesheet' href='style/index.styl')
-    title Document
+    link(rel='icon' type='image/png' href='favicon.png')
+    title QR Code Painter
   body
     .horizontal
+      label.displaced(for='input') Input
       input#input(type='text' placeholder='Enter text here...')
       button#clear Clear
       button#paste Paste
