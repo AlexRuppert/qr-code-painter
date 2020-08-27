@@ -9,14 +9,10 @@ function createElement(tag: string) {
 const debug = true
 function createRectTemplate() {
   let rect = createElement('rect')
-  if (debug) {
-    rect.setAttribute('width', '0.95')
-    rect.setAttribute('height', '0.95')
-  } else {
-    rect.setAttribute('width', '1')
-    rect.setAttribute('height', '1')
-    rect.setAttribute('shape-rendering', 'crispEdges')
-  }
+
+  rect.setAttribute('width', '1')
+  rect.setAttribute('height', '1')
+  rect.setAttribute('shape-rendering', 'crispEdges')
 
   return rect
 }
@@ -34,7 +30,7 @@ export function render(canvas: HTMLElement, matrix: boolean[][]) {
   canvas.innerHTML = ''
   canvas.setAttribute(
     'viewBox',
-    `0 0 ${matrix[0]?.length || 10} ${matrix.length}`,
+    `0 0 ${matrix[0].length || 10} ${matrix.length}`,
   )
   const g = createElement('g')
 

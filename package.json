@@ -1,7 +1,7 @@
 {
   "name": "qr-code-painter",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.html",
   "license": "MIT",
   "scripts": {
     "dev": "parcel serve src/index.pug",
@@ -14,5 +14,6 @@
     "pug": "^3.0.0",
     "stylus": "^0.54.8",
     "typescript": "^3.9.7"
-  }
+  },
+  "browserslist": "defaults, not IE 11"
 }

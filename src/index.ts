@@ -1,17 +1,14 @@
-import generate from './qr/generator'
+import getMatrix from './qr/matrixGenerator'
 import { render } from './qr/renderer'
-//@ts-ignore
-module?.hot?.accept()
+
+try {
+  //@ts-ignore
+  module.hot.accept()
+} catch (error) {}
 
 window.onload = () => {
-  /*let matrix = [
-    [1, 0, 1, 0, 1, 0],
-    [1, 0, 1, 0, 1, 0],
-    [1, 0, 1, 0, 1, 0],
-    [1, 0, 1, 0, 1, 0],
-    [1, 0, 1, 0, 1, 0],
-    [1, 0, 1, 0, 1, 0],
-  ]*/
-  let matrix = generate('HELLO WORLD')
-  render(document.getElementById('canvas') as HTMLElement, matrix)
+  let matrix = getMatrix('HI WELT!')
+
+  const canvas = document.getElementById('canvas') as HTMLElement
+  render(canvas, matrix)
 }
