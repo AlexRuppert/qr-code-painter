@@ -7,12 +7,43 @@ html(lang='en')
     link(rel='stylesheet' href='style/index.styl')
     link(rel='icon' type='image/png' href='favicon.png')
     title QR Code Painter
+
   body
     .horizontal
       label.displaced(for='input') Input
-      input#input(type='text' placeholder='Enter text here...')
+      input#input(
+        type='text'
+        placeholder='Enter text here...'
+        spellcheck='false'
+      )
       button#clear Clear
       button#paste Paste
 
-    svg(xmlns='http://www.w3.org/2000/svg')
-    script(src='index.ts') 
+    svg
+      g
+    .horizontal.pinned-bottom
+      a(
+        href='javascript:(function()%7Bwindow.open(\'https%3A%2F%2Falexruppert.github.io%2Fqr-code-painter%2F%3Fq%3D\'%2BencodeURIComponent(window.location.href)%2C\'_blank\')%7D)()'
+      ) Bookmarklet
+      a(href='#open-modal') About
+      a(href='https://github.com/AlexRuppert/qr-code-painter') GitHub
+    #open-modal.modal
+      div
+        a.modal-close(href='#') Close
+        h1 About
+        p Whenever I wanted to share something via a QR-Code, I got pretty annoyed:
+        | Either you need to install something or you use an online tool.
+        p And most of those tools in the top search results are full of ads, collect cookies or even send your inputs to a server. Which you probably do not want, especially when you are creating a QR-Code for an email address or Guest-Wifi-Login.
+        | So I implemented a QR-Code encoder from scratch (for the fun of it):
+
+        ul
+          li Everything runs in <strong>your</strong> browser, your data does not leave your device
+          li Open Source - Check out the GitHub link
+          li No ads, cookies or other annoyances
+          li Simple and tiny, loads fast
+
+        p Have fun! 😃
+
+        p PS: You can create a <a href='https://en.wikipedia.org/wiki/Bookmarklet'>boorkmarklet</a> by saving the link at the bottm left to quickly share your current page's url as a QR-Code.
+    script(src='noIE.js' async)
+    script(src='index.ts' async)
