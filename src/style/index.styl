@@ -1,9 +1,9 @@
 @import './reset'
 @import './typography'
 
-primaryColor = #ff5600
-hoverColor = lighten(primaryColor, 20%)
-activeColor = lighten(primaryColor, 40%)
+primaryColor = #d73200
+hoverColor = lighten(primaryColor, 10%)
+activeColor = lighten(primaryColor, 20%)
 
 remove-background()
   outline none
@@ -35,11 +35,11 @@ remove-background()
 
 #input
   margin 0 1em
-  width calc(100% - 200px)
+  width calc(100% - 220px)
 
 textarea
   padding 0.5em
-  min-width 300px
+  min-width 200px
   remove-background()
   min-height 2em
   border-bottom 1px solid primaryColor
@@ -51,6 +51,11 @@ textarea
 
   &:active
     border-color activeColor
+
+@media (max-width 600px)
+  #input
+    margin 0
+    width 100%
 
 button
   align-self center
@@ -82,6 +87,7 @@ svg
     content ''
 
 a
+  margin 2px 5px
   color primaryColor
   font-variant all-small-caps
 
@@ -148,6 +154,9 @@ body
   left 0
   display grid
   visibility hidden
+  padding 1em
+  background #fff
+  box-shadow 2px 2px 5px #aaa
   opacity 0
 
   &:target
@@ -158,3 +167,9 @@ a.select
   padding 0 5px
   text-decoration none
   font-size 2em
+
+@media (max-width 600px)
+  a.select
+    position absolute
+    top -10px
+    left 0

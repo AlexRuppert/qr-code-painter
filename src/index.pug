@@ -11,17 +11,17 @@ html(lang='en')
   body
     .horizontal
       label.displaced(for='input') Input
-      div(style='position: relative')
-        a.select(href='#template-container') ...
-          #template-container
-            a(
-              href='#'
-              data-template='MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;'
-            ) Email
-            a(href='#' data-template='tel:') Phone
-            a(href='#' data-template='geo:<lat>,<long>,<alt>') Geolocation
-            a(href='#' data-template='WIFI:T:WPA;S: <ssid> ;P: <password> ;;') WiFi
-            a(href='#') Cancel
+
+      a.select(href='#template-container') ...
+        #template-container
+          a(
+            href='#'
+            data-template='MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;'
+          ) Email
+          a(href='#' data-template='tel:') Phone
+          a(href='#' data-template='geo:<lat>,<long>,<alt>') Geolocation
+          a(href='#' data-template='WIFI:T:WPA;S: <ssid> ;P: <password> ;;') WiFi
+          a(href='#') Cancel
       textarea#input(
         type='text'
         rows='1'
