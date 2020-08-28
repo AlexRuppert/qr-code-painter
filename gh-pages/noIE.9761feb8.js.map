@@ -1,1 +1,0 @@
-{"mappings":"AAAK,GAAGA,OACNC,SAASC,KAAKC,UACZ","sources":["./src/noIE.js"],"sourcesContent":["if (![].find) {\r\n  document.body.innerHTML =\r\n    'Sorry, but ancient browsers, like Internet Explorer, are not supported.'\r\n}\r\n"],"names":["find","document","body","innerHTML"],"version":3,"file":"noIE.9761feb8.js.map"}

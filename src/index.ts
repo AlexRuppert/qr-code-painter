@@ -22,6 +22,10 @@ window.onload = () => {
     setInput('')
   })
 
+  canvas.addEventListener('click', () => {
+    canvas.style.maxWidth = canvas.style.maxWidth ? '' : '400px'
+  })
+
   if (
     navigator.clipboard !== undefined &&
     navigator.clipboard.readText !== undefined
