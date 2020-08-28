@@ -1,6 +1,7 @@
 import getMatrix from './qr/matrixGenerator'
-import { render, clear } from './qr/renderer'
+import { render, clear } from './svg/renderer'
 import { debounce } from './qr/utilities'
+import { saveSvg } from './svg/save'
 
 try {
   //@ts-ignore
@@ -12,11 +13,22 @@ window.onload = () => {
   const input = document.getElementById('input') as HTMLInputElement
   const pasteButton = document.getElementById('paste') as HTMLElement
   const clearButton = document.getElementById('clear') as HTMLElement
+  const download = document.getElementById('download') as HTMLElement
+  const hiddenDownloadHelper = document.getElementById(
+    'downloader',
+  ) as HTMLAnchorElement
 
-  const setInput = (value: string) => {
-    input.value = value
-    input.focus()
-    createQr()
+  const setInput = (value: string | undefined) => {
+    if (value !== undefined) {
+      input.value = value
+      input.focus()
+      createQr()
+    }
+  }
+
+  const updateFromUrl = () => {
+    const query = new URL(window.location.href).searchParams.get('q')
+    if (query) setInput(query)
   }
   clearButton.addEventListener('click', () => {
     setInput('')
@@ -24,6 +36,10 @@ window.onload = () => {
 
   canvas.addEventListener('click', () => {
     canvas.style.maxWidth = canvas.style.maxWidth ? '' : '400px'
+  })
+
+  download.addEventListener('click', () => {
+    saveSvg(canvas, hiddenDownloadHelper)
   })
 
   if (
@@ -53,7 +69,14 @@ window.onload = () => {
 
   input.addEventListener('input', debounce(createQr, 100))
   setInput('')
-
-  const query = new URL(window.location.href).searchParams.get('q')
-  if (query) setInput(query)
+  updateFromUrl()
+  window.addEventListener('locationchange', updateFromUrl)
+  ;[...document.querySelectorAll('#template-container a')].forEach((a) => {
+    let item = a as HTMLElement
+    if (item.dataset.template) {
+      item.addEventListener('click', () => {
+        setInput(item.dataset.template)
+      })
+    }
+  })
 }

@@ -11,17 +11,31 @@ html(lang='en')
   body
     .horizontal
       label.displaced(for='input') Input
-      input#input(
+      div(style='position: relative')
+        a.select(href='#template-container') ...
+          #template-container
+            a(
+              href='#'
+              data-template='MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;'
+            ) Email
+            a(href='#' data-template='tel:') Phone
+            a(href='#' data-template='geo:<lat>,<long>,<alt>') Geolocation
+            a(href='#' data-template='WIFI:T:WPA;S: <ssid> ;P: <password> ;;') WiFi
+            a(href='#') Cancel
+      textarea#input(
         type='text'
+        rows='1'
         placeholder='Enter text here...'
         spellcheck='false'
       )
-      button#clear Clear
-      button#paste Paste
+      div(style='margin-top: 0.5em;')
+        button#clear Clear
+        button#paste Paste
 
     svg
       g
-    .horizontal.pinned-bottom
+    .horizontal.pinned-bottom.space-around
+      a#download(href='javascript:void(0)') Download QR
       a(
         href='javascript:(function()%7Bwindow.open(\'https%3A%2F%2Falexruppert.github.io%2Fqr-code-painter%2F%3Fq%3D\'%2BencodeURIComponent(window.location.href)%2C\'_blank\')%7D)()'
       ) Bookmarklet
@@ -45,5 +59,6 @@ html(lang='en')
         p Have fun! 😃
 
         p PS: You can create a <a href='https://en.wikipedia.org/wiki/Bookmarklet'>boorkmarklet</a> by saving the link at the bottm left as a bookmark to quickly share your current page's url as a QR-Code.
+    a#downloader.hidden
     script(src='noIE.js' async)
     script(src='index.ts' async)

@@ -11,28 +11,37 @@ remove-background()
   border-radius 0
   background none
 
+.hidden
+  display none
+
 .displaced
   position absolute
   top -200px
 
 .horizontal
   display flex
-  justify-content space-around
+  flex-wrap wrap
+  align-items center
   margin 1.5em
   padding 0.5em 2em
   width 100vw
+
+.space-around
+  justify-content space-around
 
 .pinned-bottom
   position absolute
   bottom 5px
 
 #input
-  margin-right 1em
+  margin 0 1em
+  width calc(100% - 200px)
 
-input
+textarea
   padding 0.5em
-  width 100%
+  min-width 300px
   remove-background()
+  min-height 2em
   border-bottom 1px solid primaryColor
   font-size 1.2em
   line-height 1em
@@ -64,6 +73,7 @@ svg
   max-height calc(100vh - 10em)
   width 100%
   background #fff
+  cursor pointer
   transition all 0.2s
 
   &:after
@@ -131,3 +141,20 @@ body
 
   &:hover
     color black
+
+#template-container
+  position absolute
+  top 3em
+  left 0
+  display grid
+  visibility hidden
+  opacity 0
+
+  &:target
+    visibility visible
+    opacity 1
+
+a.select
+  padding 0 5px
+  text-decoration none
+  font-size 2em
