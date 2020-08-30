@@ -29,7 +29,7 @@ export function render(canvas: SVGSVGElement, matrix: boolean[][]) {
   canvas.innerHTML = ''
   canvas.setAttribute(
     'viewBox',
-    `0 0 ${matrix[0].length || 10} ${matrix.length}`,
+    `0 0 ${matrix[0].length + 8 || 10} ${matrix.length + 8}`,
   )
   const g = createElement('g')
   g.setAttribute('fill', '#000')
@@ -39,7 +39,7 @@ export function render(canvas: SVGSVGElement, matrix: boolean[][]) {
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
       if (matrix[y][x] === true) {
-        createRect(fragment, { x, y })
+        createRect(fragment, { x: x + 4, y: y + 4 })
       }
     }
   }

@@ -2,46 +2,48 @@ doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
-    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(
+      name='viewport'
+      content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+    )
     meta(name='Description' content='Tiny QR Code Generator')
     link(rel='stylesheet' href='style/index.styl')
     link(rel='icon' type='image/png' href='favicon.png')
     title QR Code Painter
 
   body
-    .horizontal
+    .top-row
       label.displaced(for='input') Input
 
-      a.select(href='#template-container') ...
-        #template-container
-          a(
-            href='#'
-            data-template='MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;'
-          ) Email
-          a(href='#' data-template='tel:') Phone
-          a(href='#' data-template='geo:<lat>,<long>,<alt>') Geolocation
-          a(href='#' data-template='WIFI:T:WPA;S: <ssid> ;P: <password> ;;') WiFi
-          a(href='#') Cancel
-      textarea#input(
-        type='text'
-        rows='1'
-        placeholder='Enter text here...'
-        spellcheck='false'
-      )
-      div(style='margin-top: 0.5em;')
-        button#clear Clear
-        button#paste Paste
+      #input
+        a#select(href='#template-container') +
+          #template-container
+            a(
+              href='#'
+              data-template='MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;'
+            ) Email
+            a(href='#' data-template='tel:') Phone
+            a(href='#' data-template='geo:<lat>,<long>,<alt>') Geolocation
+            a(href='#' data-template='WIFI:T:WPA;S: <ssid> ;P: <password> ;;') WiFi
+            a(href='#') Cancel
+        textarea(
+          type='text'
+          rows='1'
+          placeholder='Enter text here...'
+          spellcheck='false'
+        )
+        button#clear ×
 
-    svg
+    svg(xmlns='http://www.w3.org/2000/svg')
       g
-    .horizontal.pinned-bottom.space-around
+    .bottom-row
       a#download(href='javascript:void(0)') Download QR
       a(
         href='javascript:(function()%7Bwindow.open(\'https%3A%2F%2Falexruppert.github.io%2Fqr-code-painter%2F%3Fq%3D\'%2BencodeURIComponent(window.location.href)%2C\'_blank\')%7D)()'
       ) Bookmarklet
-      a(href='#open-modal') About
+      a#open-about(href='#about') About
       a(href='https://github.com/AlexRuppert/qr-code-painter') GitHub
-    #open-modal.modal
+    #about.modal
       div
         a.modal-close(href='#') Close
         h1 About
@@ -58,7 +60,8 @@ html(lang='en')
 
         p Have fun! 😃
 
-        p PS: You can create a <a href='https://en.wikipedia.org/wiki/Bookmarklet'>boorkmarklet</a> by saving the link at the bottm left as a bookmark to quickly share your current page's url as a QR-Code.
+        p PS: You can create a <a href='https://en.wikipedia.org/wiki/Bookmarklet'>bookmarklet</a> by saving the link at the bottm left as a bookmark to quickly share your current page's url as a QR-Code.
+
     a#downloader.hidden
     script(src='noIE.js' async)
     script(src='index.ts' async)

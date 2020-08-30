@@ -10,8 +10,7 @@ try {
 
 window.onload = () => {
   const canvas = document.querySelector('svg') as SVGSVGElement
-  const input = document.getElementById('input') as HTMLInputElement
-  const pasteButton = document.getElementById('paste') as HTMLElement
+  const input = document.querySelector('#input textarea') as HTMLInputElement
   const clearButton = document.getElementById('clear') as HTMLElement
   const download = document.getElementById('download') as HTMLElement
   const hiddenDownloadHelper = document.getElementById(
@@ -30,6 +29,7 @@ window.onload = () => {
     const query = new URL(window.location.href).searchParams.get('q')
     if (query) setInput(query)
   }
+
   clearButton.addEventListener('click', () => {
     setInput('')
   })
@@ -41,17 +41,6 @@ window.onload = () => {
   download.addEventListener('click', () => {
     saveSvg(canvas, hiddenDownloadHelper)
   })
-
-  if (
-    navigator.clipboard !== undefined &&
-    navigator.clipboard.readText !== undefined
-  ) {
-    pasteButton.addEventListener('click', async () => {
-      setInput(await navigator.clipboard.readText())
-    })
-  } else {
-    pasteButton.style.display = 'none'
-  }
 
   const createQr = () => {
     const value = input.value
