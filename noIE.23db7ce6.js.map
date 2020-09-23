@@ -1,1 +1,0 @@
-{"version":3,"sources":["noIE.js"],"names":["find","document","body","innerHTML"],"mappings":";AAAK,GAAGA,OACNC,SAASC,KAAKC,UACZ","file":"noIE.23db7ce6.js","sourceRoot":"..\\src","sourcesContent":["if (![].find) {\r\n  document.body.innerHTML =\r\n    'Sorry, but ancient browsers, like Internet Explorer, are not supported.'\r\n}\r\n"]}
