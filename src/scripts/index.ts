@@ -10,12 +10,22 @@ try {
 
 window.onload = () => {
   const canvas = document.querySelector('svg') as SVGSVGElement
-  const input = document.querySelector('#input textarea') as HTMLInputElement
-  const clearButton = document.getElementById('clear') as HTMLElement
-  const download = document.getElementById('download') as HTMLElement
+  const input = document.querySelector('textarea') as HTMLTextAreaElement
   const hiddenDownloadHelper = document.getElementById(
     'downloader',
   ) as HTMLAnchorElement
+  const buttons = {
+    '#templates': () =>
+      document.getElementById('template-container')?.classList.toggle('hidden'),
+    '#clear': () => setInput(''),
+    '#download': () => saveSvg(canvas, hiddenDownloadHelper),
+  }
+
+  for (const [key, value] of Object.entries(buttons)) {
+    ;[...document.querySelectorAll(key)].forEach((el) =>
+      el.addEventListener('click', value),
+    )
+  }
 
   const setInput = (value: string | undefined) => {
     if (value !== undefined) {
@@ -30,16 +40,17 @@ window.onload = () => {
     if (query) setInput(query)
   }
 
-  clearButton.addEventListener('click', () => {
-    setInput('')
+  ;[...document.querySelectorAll('#template-container li')].map((el) => {
+    let item = el as HTMLElement
+    item.addEventListener('click', () => {
+      if (item.dataset.template) {
+        setInput(item.dataset.template)
+      }
+      item.parentElement?.classList.add('hidden')
+    })
   })
-
   canvas.addEventListener('click', () => {
     canvas.style.maxWidth = canvas.style.maxWidth ? '' : '400px'
-  })
-
-  download.addEventListener('click', () => {
-    saveSvg(canvas, hiddenDownloadHelper)
   })
 
   const createQr = () => {
@@ -60,12 +71,4 @@ window.onload = () => {
   setInput('')
   updateFromUrl()
   window.addEventListener('locationchange', updateFromUrl)
-  ;[...document.querySelectorAll('#template-container a')].forEach((a) => {
-    let item = a as HTMLElement
-    if (item.dataset.template) {
-      item.addEventListener('click', () => {
-        setInput(item.dataset.template)
-      })
-    }
-  })
 }

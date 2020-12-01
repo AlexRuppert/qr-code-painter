@@ -1,0 +1,18 @@
+{
+  "collapseAttributeWhitespace": true,
+  "collapseWhitespace": "all",
+  "collapseBooleanAttributes": {
+    "amphtml": false
+  },
+  "deduplicateAttributeValues": true,
+  "mergeScripts": true,
+  "mergeStyles": true,
+  "removeComments": "all",
+  "removeRedundantAttributes": true,
+  "removeEmptyAttributes": true,
+  
+  "minifyCss": {
+    "preset": "advanced"
+  },
+  "minifySvg": {}
+}

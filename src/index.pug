@@ -2,31 +2,35 @@ doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
-    meta(
-      name='viewport'
-      content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
-    )
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
     meta(name='Description' content='Tiny QR Code Generator')
-    link(rel='stylesheet' href='style/index.styl')
-    link(rel='icon' type='image/png' href='favicon.png')
-    title QR Code Painter
+    meta(name='msapplication-TileColor' content='#2b5797')
+    meta(name='theme-color' content='#fff')
+    //- prettier-ignore
+    link(rel='apple-touch-icon' sizes='180x180' href='assets/apple-touch-icon.png')
+    //- prettier-ignore
+    link(rel='icon' type='image/png' sizes='32x32' href='assets/favicon-32x32.png')
+    //- prettier-ignore
+    link(rel='icon' type='image/png' sizes='16x16' href='assets/favicon-16x16.png')
+    link(rel='manifest' href='manifest.webmanifest')
+    link(rel='mask-icon' href='assets/safari-pinned-tab.svg' color='#555')
 
+    title QR Code Painter
+    link(rel='stylesheet' href='style/index.styl')
   body
     .top-row
-      label.displaced(for='input') Input
-
+      label.displaced(for='textarea') Input
       #input
-        a#select(href='#template-container') +
-          #template-container
-            a(
-              href='#'
-              data-template='MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;'
-            ) Email
-            a(href='#' data-template='tel:') Phone
-            a(href='#' data-template='geo:<lat>,<long>,<alt>') Geolocation
-            a(href='#' data-template='WIFI:T:WPA;S: <ssid> ;P: <password> ;;') WiFi
-            a(href='#') Cancel
-        textarea(
+        button#templates +
+        ul#template-container.hidden
+          li(
+            data-template='MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;'
+          ) Email
+          li(data-template='tel:') Phone
+          li(data-template='geo:<lat>,<long>,<alt>') Geolocation
+          li(data-template='WIFI:T:WPA;S: <ssid> ;P: <password> ;;') WiFi
+          li Cancel
+        textarea#textarea(
           type='text'
           rows='1'
           placeholder='Enter text here...'
@@ -62,6 +66,10 @@ html(lang='en')
 
         p PS: You can create a <a href='https://en.wikipedia.org/wiki/Bookmarklet'>bookmarklet</a> by saving the link at the bottom left as a bookmark to quickly share your current page's url as a QR-Code.
 
-    a#downloader.hidden
-    script(src='noIE.js' async)
-    script(src='index.ts' async)
+    a#downloader.hidden(href='#') 
+    script.
+      [].find || (document.body.innerHTML = "Internet Explorer is way too old for this.");
+    script(src='scripts/index.ts' async)
+    //script.
+      const sw = "sw.js";
+      navigator.serviceWorker.register(sw);
