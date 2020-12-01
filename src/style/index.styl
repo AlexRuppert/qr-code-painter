@@ -32,18 +32,21 @@ body, textarea
   position absolute
   top -200px
 
-.top-row
+.top
   padding 30px
   width 100vw
 
-.bottom-row
+.bottom
   position absolute
   bottom 1em
   display flex
   flex-wrap wrap
   justify-content space-between
 
-#input
+.mini
+  max-width 400px
+
+#controls
   position relative
   display flex
   width 100%
@@ -53,6 +56,7 @@ body, textarea
 
 #clear
   position absolute
+  top -2px
   right 0
   z-index 5
 
@@ -98,17 +102,20 @@ svg
     padding-bottom 100%
     content ''
 
+path
+  pointer-events none
+
 a
   margin 2px 6px
   font-size 1.2em
 
-#template-container
+ul
   position absolute
   top 2em
   left 0
   padding 0
-  background #fff
-  box-shadow 2px 2px 5px #aaa
+  background-color rgba(255, 255, 255, 0.8)
+  backdrop-filter blur(7px)
 
   &:target
     visibility visible
@@ -120,7 +127,6 @@ a
     color primaryColor
     list-style-type none
     font-variant all-small-caps
-    font-size smaller
     line-height 3em
     cursor pointer
 

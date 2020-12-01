@@ -11,14 +11,24 @@ try {
 window.onload = () => {
   const canvas = document.querySelector('svg') as SVGSVGElement
   const input = document.querySelector('textarea') as HTMLTextAreaElement
-  const hiddenDownloadHelper = document.getElementById(
-    'downloader',
-  ) as HTMLAnchorElement
+
+  const templateContainer = document.querySelector('ul')
+  const templates = {
+    Email: 'MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;',
+    Phone: 'tel:',
+    Geolocation: 'geo:<lat>,<long>,<alt>',
+    WiFi: 'WIFI:T:WPA;S: <ssid> ;P: <password> ;;',
+    '× Cancel': undefined,
+  }
   const buttons = {
-    '#templates': () =>
-      document.getElementById('template-container')?.classList.toggle('hidden'),
+    '#templates': () => templateContainer?.classList.toggle('hidden'),
     '#clear': () => setInput(''),
-    '#download': () => saveSvg(canvas, hiddenDownloadHelper),
+    '#download': () =>
+      saveSvg(
+        canvas,
+        document.querySelector('#downloader') as HTMLAnchorElement,
+      ),
+    svg: (el: any) => el.target.classList.toggle('mini'),
   }
 
   for (const [key, value] of Object.entries(buttons)) {
@@ -27,8 +37,8 @@ window.onload = () => {
     )
   }
 
-  const setInput = (value: string | undefined) => {
-    if (value !== undefined) {
+  const setInput = (value: string | undefined | null) => {
+    if (value != null) {
       input.value = value
       input.focus()
       createQr()
@@ -36,34 +46,28 @@ window.onload = () => {
   }
 
   const updateFromUrl = () => {
-    const query = new URL(window.location.href).searchParams.get('q')
-    if (query) setInput(query)
+    setInput(new URL(window.location.href).searchParams.get('q'))
   }
 
-  ;[...document.querySelectorAll('#template-container li')].map((el) => {
-    let item = el as HTMLElement
-    item.addEventListener('click', () => {
-      if (item.dataset.template) {
-        setInput(item.dataset.template)
-      }
-      item.parentElement?.classList.add('hidden')
+  for (const [key, value] of Object.entries(templates)) {
+    const li = document.createElement('li')
+    li.textContent = key
+    li.addEventListener('click', () => {
+      setInput(value)
+      templateContainer?.classList.add('hidden')
     })
-  })
-  canvas.addEventListener('click', () => {
-    canvas.style.maxWidth = canvas.style.maxWidth ? '' : '400px'
-  })
+    templateContainer?.appendChild(li)
+  }
 
   const createQr = () => {
     const value = input.value
-    if (value.length > 0) {
+    clear(canvas)
+    if (value !== '') {
       try {
         render(canvas, getMatrix(value))
       } catch (error) {
-        clear(canvas)
         alert('The input was too long for QR!')
       }
-    } else {
-      clear(canvas)
     }
   }
 
