@@ -3,8 +3,7 @@ This is a simple static [Web page](https://alexruppert.github.io/qr-code-painter
 
 There are no external dependencies and everything is generated in the browser.
 
-You can use the page as a bookmarklet or web panel for quick access without the need to install any browser addons.
-
+You can use the page as a [bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet) or web panel for quick access without the need to install any browser addons.
 
 # Build
 `npm run dev`
