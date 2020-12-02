@@ -7,11 +7,7 @@ export function chunkString(content: string, length: number): string[] {
 }
 
 export function get0s(count: number) {
-  let temp = ''
-  for (let i = 0; i < count; i++) {
-    temp += '0'
-  }
-  return temp
+  return [...Array(count)].map((e) => '0').join('')
 }
 
 export function pad0(content: string, length: number) {
@@ -33,10 +29,10 @@ export function concatTypedArrays(a: Uint8Array, b: Uint8Array): Uint8Array {
 export function range(from: number, to: number): number[] {
   return Array(to - from)
     .fill(from)
-    .map((x, y) => x + y)
+    .map((x, index) => x + index)
 }
 export function createMatrix(dimensions: number): boolean[][] {
-  return [...new Array(dimensions)].map((arr) =>
+  return [...new Array(dimensions)].map(() =>
     [...new Array(dimensions)].fill(null),
   )
 }
@@ -48,14 +44,11 @@ export function mergeMatrices(
   matrix2: boolean[][],
 ): boolean[][] {
   let result = cloneMatrix(matrix1)
-
-  for (let y = 0; y < matrix1.length; y++) {
-    for (let x = 0; x < matrix1[0].length; x++) {
-      if (matrix1[y][x] === null) {
-        result[y][x] = matrix2[y][x]
-      }
+  iterateOverMatrix(matrix1, (val, x, y) => {
+    if (val === null) {
+      result[y][x] = matrix2[y][x]
     }
-  }
+  })
   return result
 }
 

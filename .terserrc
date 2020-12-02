@@ -1,0 +1,19 @@
+{
+  "compress": {
+    "booleans_as_integers": true,
+    "keep_fargs": false,
+    "passes": 3,
+    "pure_getters": true,
+    "toplevel": true,
+    "unsafe_arrows": true,
+    "unsafe_comps": true,
+    "unsafe_math": true,
+    "unsafe_undefined": true
+  },
+  "mangle": {
+    "properties": {
+      "keep_quoted": true
+    }
+  },
+  "ecma": 2015
+}
