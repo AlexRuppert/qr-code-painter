@@ -4,13 +4,12 @@
   "collapseBooleanAttributes": {
     "amphtml": false
   },
-  "deduplicateAttributeValues": true,
-  "mergeScripts": true,
-  "mergeStyles": true,
+  "deduplicateAttributeValues": false,
+  "mergeScripts": false,
+  "mergeStyles": false,
   "removeComments": "all",
   "removeRedundantAttributes": true,
   "removeEmptyAttributes": true,
-  
   "minifyCss": {
     "preset": "advanced"
   },

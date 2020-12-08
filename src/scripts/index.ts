@@ -13,11 +13,12 @@ window.onload = () => {
   const input = document.querySelector('textarea') as HTMLTextAreaElement
 
   const templateContainer = document.querySelector('ul')
+  // prettier-ignore
   const templates = {
-    Email: 'MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;',
-    Phone: 'tel:',
-    Geolocation: 'geo:<lat>,<long>,<alt>',
-    WiFi: 'WIFI:T:WPA;S: <ssid> ;P: <password> ;;',
+    'Email': 'MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;',
+    'Phone': 'tel:',
+    'Geolocation': 'geo:<lat>,<long>,<alt>',
+    'WiFi': 'WIFI:T:WPA;S: <ssid> ;P: <password> ;;',
     '× Cancel': undefined,
   }
   const buttons = {

@@ -3,8 +3,8 @@ html(lang='en')
   head
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
-    script(src='scripts/index.ts' defer)
-    link(rel='stylesheet' href='style/index.styl')
+    //script(src='scripts/index.ts' defer)
+    //link(rel='stylesheet' href='style/index.styl')
     meta(name='Description' content='Tiny QR Code Generator')
     meta(name='msapplication-TileColor' content='#2b5797')
     meta(name='theme-color' content='#fff')
@@ -16,12 +16,13 @@ html(lang='en')
     link(rel='icon' type='image/png' sizes='16x16' href='assets/favicon-16x16.png')
     link(rel='manifest' href='manifest.webmanifest')
     link(rel='mask-icon' href='assets/safari-pinned-tab.svg' color='#555')
-
+    style
+      | @import "./style/index.styl"
     title QR Code Painter
   body
     .top
       label.displaced(for='input') Input
-      #controls
+      main#controls
         button#templates +
         ul.hidden
         textarea#input(
@@ -38,8 +39,11 @@ html(lang='en')
       a(
         href='javascript:(function()%7Bwindow.open(\'https%3A%2F%2Falexruppert.github.io%2Fqr-code-painter%2F%3Fq%3D\'%2BencodeURIComponent(window.location.href)%2C\'_blank\')%7D)()'
       ) Bookmarklet
-      a(href='https://github.com/AlexRuppert/qr-code-painter') GitHub &amp; REadme
+      a(href='https://github.com/AlexRuppert/qr-code-painter') GitHub &amp; Readme
+
     a#downloader.hidden(href='#') 
+    script.
+      require("./scripts/index.ts");
     script.
       [].find || (document.body.innerHTML = "Internet Explorer is way too old for this.");
       const sw = "sw.js";

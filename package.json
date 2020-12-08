@@ -26,5 +26,8 @@
     "staticPath": "src/static",
     "watcherGlob": "**"
   },
-  "browserslist": "defaults, not IE 11"
+  "browserslist": "defaults, not IE 11",
+  "dependencies": {
+    "parcel-plugin-inline-source": "^1.0.0"
+  }
 }
