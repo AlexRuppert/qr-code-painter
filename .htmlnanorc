@@ -10,8 +10,6 @@
   "removeComments": "all",
   "removeRedundantAttributes": true,
   "removeEmptyAttributes": true,
-  "minifyCss": {
-    "preset": "advanced"
-  },
+  "minifyCss": true,
   "minifySvg": {}
 }
