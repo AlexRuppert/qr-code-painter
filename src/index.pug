@@ -8,22 +8,47 @@ html(lang='en')
     meta(name='Description' content='Tiny QR Code Generator')
     meta(name='msapplication-TileColor' content='#2b5797')
     meta(name='theme-color' content='#fff')
-    //- prettier-ignore
-    link(rel='apple-touch-icon' sizes='180x180' href='assets/apple-touch-icon.png')
-    //- prettier-ignore
-    link(rel='icon' type='image/png' sizes='32x32' href='assets/favicon-32x32.png')
-    //- prettier-ignore
-    link(rel='icon' type='image/png' sizes='16x16' href='assets/favicon-16x16.png')
+    link(
+      rel='apple-touch-icon'
+      sizes='180x180'
+      href='assets/apple-touch-icon.png'
+    )
+    link(
+      rel='icon'
+      type='image/png'
+      sizes='32x32'
+      href='assets/favicon-32x32.png'
+    )
+    link(
+      rel='icon'
+      type='image/png'
+      sizes='16x16'
+      href='assets/favicon-16x16.png'
+    )
     link(rel='manifest' href='manifest.webmanifest')
     link(rel='mask-icon' href='assets/safari-pinned-tab.svg' color='#555')
     style
       | @import "./style/index.styl"
     title QR Code Painter
   body
-    .top
-      label.displaced(for='input') Input
-      main#controls
-        button#templates +
+    main#controls
+      button#menu-button
+        span
+      #menu-container.closed
+        ul
+          li 
+            a(href='javascript:void(0)') Templates
+            ul#templates
+          li
+            a#download(href='javascript:void(0)') Download QR
+          li
+            a(
+              href='javascript:(function()%7Bwindow.open(\'https%3A%2F%2Falexruppert.github.io%2Fqr-code-painter%2F%3Fq%3D\'%2BencodeURIComponent(window.location.href)%2C\'_blank\')%7D)()'
+            ) Bookmarklet
+          li
+            a(href='https://github.com/AlexRuppert/qr-code-painter') GitHub &amp; Readme
+      .top
+        label.displaced(for='input') Input
         ul.hidden
         textarea#input(
           type='text'
@@ -34,12 +59,6 @@ html(lang='en')
         button#clear ×
 
     svg(xmlns='http://www.w3.org/2000/svg' stroke='#000' stroke-width='1.05')
-    .bottom
-      a#download(href='javascript:void(0)') Download QR
-      a(
-        href='javascript:(function()%7Bwindow.open(\'https%3A%2F%2Falexruppert.github.io%2Fqr-code-painter%2F%3Fq%3D\'%2BencodeURIComponent(window.location.href)%2C\'_blank\')%7D)()'
-      ) Bookmarklet
-      a(href='https://github.com/AlexRuppert/qr-code-painter') GitHub &amp; Readme
 
     a#downloader.hidden(href='#') 
     script.

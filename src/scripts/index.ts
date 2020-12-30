@@ -11,18 +11,31 @@ try {
 window.onload = () => {
   const canvas = document.querySelector('svg') as SVGSVGElement
   const input = document.querySelector('textarea') as HTMLTextAreaElement
+  const menu = document.querySelector('#menu-container') as HTMLElement
 
-  const templateContainer = document.querySelector('ul')
+  const templateContainer = document.querySelector('ul#templates')
   // prettier-ignore
   const templates = {
     'Email': 'MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;',
     'Phone': 'tel:',
     'Geolocation': 'geo:<lat>,<long>,<alt>',
     'WiFi': 'WIFI:T:WPA;S: <ssid> ;P: <password> ;;',
-    '× Cancel': undefined,
   }
   const buttons = {
-    '#templates': () => templateContainer?.classList.toggle('hidden'),
+    '#menu-button': () => {
+      document
+        .querySelectorAll('#menu-container, #menu-button')
+        .forEach((el) => el.classList.toggle('open'))
+    },
+    body: (event) => {
+      if (
+        ![
+          ...document.querySelectorAll('#menu-container, #menu-button'),
+        ].some((el) => el.contains(event.target))
+      ) {
+        closeMenu()
+      }
+    },
     '#clear': () => setInput(''),
     '#download': () =>
       saveSvg(
@@ -50,15 +63,27 @@ window.onload = () => {
     setInput(new URL(window.location.href).searchParams.get('q'))
   }
 
+  ;[...menu.querySelectorAll('li > ul')].forEach((el) => {
+    el.classList.add('hidden')
+    el.parentElement?.addEventListener('click', () => {
+      el.classList.toggle('hidden')
+    })
+  })
+
   for (const [key, value] of Object.entries(templates)) {
     const li = document.createElement('li')
-    li.textContent = key
+    li.innerHTML = `<span>${key}</span>`
     li.addEventListener('click', () => {
       setInput(value)
-      templateContainer?.classList.add('hidden')
+      closeMenu()
     })
     templateContainer?.appendChild(li)
   }
+
+  const closeMenu = () =>
+    document
+      .querySelectorAll('#menu-container, #menu-button')
+      .forEach((el) => el.classList.remove('open'))
 
   const createQr = () => {
     const value = input.value

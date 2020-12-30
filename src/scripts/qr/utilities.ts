@@ -7,12 +7,11 @@ export function chunkString(content: string, length: number): string[] {
 }
 
 export function get0s(count: number) {
-  return [...Array(count)].map((e) => '0').join('')
+  return ''.padStart(count, '0')
 }
 
 export function pad0(content: string, length: number) {
-  const diff = length - content.length
-  return get0s(diff) + content
+  return content.padStart(length, '0')
 }
 
 export function numToBits(content: number, length: number) {

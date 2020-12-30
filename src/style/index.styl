@@ -33,15 +33,9 @@ body, textarea
   top -200px
 
 .top
-  padding 30px
+  position relative
+  padding 50px
   width 100vw
-
-.bottom
-  position absolute
-  bottom 1em
-  display flex
-  flex-wrap wrap
-  justify-content space-between
 
 .mini
   max-width 400px
@@ -54,10 +48,88 @@ body, textarea
 #templates
   margin-left -30px
 
+#menu-button
+  position fixed
+  top 0
+  left 0
+  z-index 99
+  padding 10px
+  width 40px
+  height 40px
+
+  span, span::before, span::after
+    position absolute
+    display block
+    width 22px
+    height 2px
+    background primaryColor
+    transition all 0.2s
+
+  span::before
+    top -8px
+    content ''
+
+  span::after
+    top 8px
+    content ''
+
+  &.open
+    span
+      transform rotate(45deg)
+
+    span::before
+      top 0
+      transform rotate(0deg)
+
+    span::after
+      top 0
+      transform rotate(90deg)
+
+#menu-container
+  position fixed
+  top 0
+  bottom 0
+  left 0
+  z-index 2
+  overflow-y auto
+  margin-left -100%
+  padding-top 40px
+  background-color rgba(255, 246, 241, 0.7)
+  box-shadow 0 0 5px rgba(100, 0, 0, 0.1)
+  transition all 0.2s
+  backdrop-filter blur(2px)
+
+  &.open
+    margin-left 0
+
+  ul
+    margin 0
+    padding 0
+
+    li
+      min-height 3em
+      color primaryColor
+      list-style-type none
+      font-variant all-small-caps
+      line-height 3em
+      cursor pointer
+
+      a, span
+        display block
+        margin 0
+        padding 0 3em
+        width 100%
+        height 100%
+
+      a:hover, span:hover
+        background rgba(100, 0, 0, 0.1)
+
+  ul ul
+    margin-left 30px
+
 #clear
   position absolute
-  top -2px
-  right 0
+  right 55px
   z-index 5
 
 textarea, button
@@ -108,27 +180,3 @@ path
 a
   margin 2px 6px
   font-size 1.2em
-
-ul
-  position absolute
-  top 2em
-  left 0
-  padding 0
-  background-color rgba(255, 255, 255, 0.8)
-  backdrop-filter blur(7px)
-
-  &:target
-    visibility visible
-    opacity 1
-
-  li
-    padding 0 1em
-    min-height 3em
-    color primaryColor
-    list-style-type none
-    font-variant all-small-caps
-    line-height 3em
-    cursor pointer
-
-    &:hover
-      background rgba(0, 0, 0, 0.1)
