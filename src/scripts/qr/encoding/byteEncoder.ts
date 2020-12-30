@@ -1,11 +1,8 @@
 import { Encoder } from './encoder'
-import { numToBits } from '../utilities'
+import { numToBits, encodeUtf8 } from '../utilities'
 
 export class ByteEncoder extends Encoder {
   encodeSymbols(content: string) {
-    return content
-      .split('')
-      .map((char) => numToBits(char.charCodeAt(0), 8))
-      .join('')
+    return [...encodeUtf8(content)].map((el) => numToBits(el, 8)).join('')
   }
 }
