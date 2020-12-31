@@ -26,7 +26,7 @@ body, textarea
   line-height 1.3em
 
 .hidden
-  display none
+  display none !important
 
 .displaced
   position absolute
@@ -194,3 +194,7 @@ svg
 
 path
   pointer-events none
+
+@media all and (display-mode standalone)
+  #install
+    display none !important

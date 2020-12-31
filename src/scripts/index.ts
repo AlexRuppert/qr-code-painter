@@ -13,8 +13,11 @@ window.onload = () => {
   const input = document.querySelector('textarea') as HTMLTextAreaElement
   const menu = document.querySelector('#menu-container') as HTMLElement
   const favorites = document.querySelector('#favorites') as HTMLElement
-
+  const installButton = document.querySelector('#install') as HTMLElement
   const templateContainer = document.querySelector('ul#templates')
+
+  let deferredInstallPrompt
+
   // prettier-ignore
   const templates = {
     'Email': 'MATMSG:TO: <email-address> ;SUB: <Subject> ;BODY: <Text>;;',
@@ -45,6 +48,13 @@ window.onload = () => {
       ),
     svg: (el: any) => el.target.classList.toggle('mini'),
     '#favorite': () => saveFavorite(),
+    '#install': async () => {
+      deferredInstallPrompt.prompt()
+      const choice = deferredInstallPrompt.userChoice
+      if (choice.outcome === 'accepted') {
+        hide(installButton)
+      }
+    },
   }
 
   for (const [key, value] of Object.entries(buttons)) {
@@ -66,9 +76,9 @@ window.onload = () => {
   }
 
   ;[...menu.querySelectorAll('li > ul')].forEach((el) => {
-    el.classList.add('hidden')
+    hide(el)
     el.parentElement?.addEventListener('click', () => {
-      el.classList.toggle('hidden')
+      toggleVisibility(el)
     })
   })
 
@@ -139,4 +149,36 @@ window.onload = () => {
   updateFromUrl()
   updateFavorites()
   window.addEventListener('locationchange', updateFromUrl)
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    deferredInstallPrompt = e
+
+    if (
+      !(
+        window.matchMedia('(display-mode: standalone)').matches ||
+        navigator['standalone']
+      )
+    )
+      show(installButton)
+  })
+  window.addEventListener('appinstalled', (evt) => {
+    hide(installButton)
+  })
+}
+
+function classListHidden(
+  element: HTMLElement,
+  operation: 'add' | 'remove' | 'toggle',
+) {
+  element.classList[operation]('hidden')
+}
+
+function hide(element) {
+  classListHidden(element, 'add')
+}
+function show(element) {
+  classListHidden(element, 'remove')
+}
+function toggleVisibility(element) {
+  classListHidden(element, 'toggle')
 }
