@@ -94,10 +94,14 @@ body, textarea
   overflow-y auto
   margin-left -100%
   padding-top 40px
-  background-color rgba(255, 246, 241, 0.7)
+  max-width 100%
+  width 400px
+  background-color rgba(255, 246, 241, 0.9)
   box-shadow 0 0 5px rgba(100, 0, 0, 0.1)
+  font-size 1.2em
   transition all 0.2s
-  backdrop-filter blur(2px)
+  user-select none
+  backdrop-filter blur(6px)
 
   &.open
     margin-left 0
@@ -121,16 +125,31 @@ body, textarea
         width 100%
         height 100%
 
-      a:hover, span:hover
+      a:hover, span:hover, button:hover
         background rgba(100, 0, 0, 0.1)
 
   ul ul
     margin-left 30px
 
-#clear
+  #favorites
+    li
+      display flex
+
+      a
+        padding 0 10px
+        width 50px
+        text-align center
+
+.icon
   position absolute
+  z-index 1
+  font-size 1.3em
+
+#clear
   right 55px
-  z-index 5
+
+#favorite
+  left 15px
 
 textarea, button
   align-self center
@@ -153,7 +172,6 @@ button, a
   color primaryColor
   text-decoration none
   font-variant all-small-caps
-  font-size 1.5em
   cursor pointer
 
   &:hover
@@ -176,7 +194,3 @@ svg
 
 path
   pointer-events none
-
-a
-  margin 2px 6px
-  font-size 1.2em

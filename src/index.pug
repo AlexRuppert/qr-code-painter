@@ -36,11 +36,14 @@ html(lang='en')
         span
       #menu-container.closed
         ul
+          li
+            span Quick Access
+            ul#favorites
           li 
-            a(href='javascript:void(0)') Templates
+            span Templates
             ul#templates
           li
-            a#download(href='javascript:void(0)') Download QR
+            span#download Download QR
           li
             a(
               href='javascript:(function()%7Bwindow.open(\'https%3A%2F%2Falexruppert.github.io%2Fqr-code-painter%2F%3Fq%3D\'%2BencodeURIComponent(window.location.href)%2C\'_blank\')%7D)()'
@@ -49,14 +52,14 @@ html(lang='en')
             a(href='https://github.com/AlexRuppert/qr-code-painter') GitHub &amp; Readme
       .top
         label.displaced(for='input') Input
-        ul.hidden
+        button#favorite.icon ☆
         textarea#input(
           type='text'
           rows='1'
           placeholder='Enter text here...'
           spellcheck='false'
         )
-        button#clear ×
+        button#clear.icon ×
 
     svg(xmlns='http://www.w3.org/2000/svg' stroke='#000' stroke-width='1.05')
 
@@ -64,6 +67,6 @@ html(lang='en')
     script.
       require("./scripts/index.ts");
     script.
-      [].find || (document.body.innerHTML = "Internet Explorer is way too old for this.");
+      [].find || (document.body.innerHTML = "Internet Explorer is way too old for this. Sorry!");
       const sw = "sw.js";
       navigator.serviceWorker.register(sw);

@@ -12,6 +12,7 @@ window.onload = () => {
   const canvas = document.querySelector('svg') as SVGSVGElement
   const input = document.querySelector('textarea') as HTMLTextAreaElement
   const menu = document.querySelector('#menu-container') as HTMLElement
+  const favorites = document.querySelector('#favorites') as HTMLElement
 
   const templateContainer = document.querySelector('ul#templates')
   // prettier-ignore
@@ -43,6 +44,7 @@ window.onload = () => {
         document.querySelector('#downloader') as HTMLAnchorElement,
       ),
     svg: (el: any) => el.target.classList.toggle('mini'),
+    '#favorite': () => saveFavorite(),
   }
 
   for (const [key, value] of Object.entries(buttons)) {
@@ -96,9 +98,45 @@ window.onload = () => {
       }
     }
   }
+  const saveFavorite = () => {
+    const name = prompt('Please give a name for quick access:')
+    if (name?.length) {
+      localStorage.setItem(name, input.value)
+    }
+    updateFavorites()
+  }
+
+  const updateFavorites = () => {
+    favorites.innerHTML = ''
+    let storage = Object.entries({ ...localStorage })
+    storage.sort((a: [string, string], b: [string, string]) =>
+      a[0].localeCompare(b[0]),
+    )
+
+    storage.forEach(([key, value]) => {
+      const li = document.createElement('li')
+      const span = document.createElement('span')
+      const remove = document.createElement('a')
+      remove.innerText = '×'
+      span.innerText = key
+      li.appendChild(span)
+      li.appendChild(remove)
+      span.addEventListener('click', () => {
+        setInput(value)
+        closeMenu()
+      })
+      remove.addEventListener('click', (e) => {
+        e.stopPropagation()
+        localStorage.removeItem(key)
+        updateFavorites()
+      })
+      favorites.appendChild(li)
+    })
+  }
 
   input.addEventListener('input', debounce(createQr, 100))
   setInput('')
   updateFromUrl()
+  updateFavorites()
   window.addEventListener('locationchange', updateFromUrl)
 }
