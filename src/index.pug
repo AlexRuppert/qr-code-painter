@@ -3,8 +3,6 @@ html(lang='en')
   head
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
-    //script(src='scripts/index.ts' defer)
-    //link(rel='stylesheet' href='style/index.styl')
     meta(name='Description' content='Tiny QR Code Generator')
     meta(name='msapplication-TileColor' content='#2b5797')
     meta(name='theme-color' content='#fff')
@@ -32,7 +30,7 @@ html(lang='en')
     title QR Code Painter
   body
     main#controls
-      button#menu-button
+      button#menu-button(aria-label='Open Menu')
         span
       #menu-container.closed
         ul
@@ -54,6 +52,7 @@ html(lang='en')
             span#install.hidden Install for Offline Use
       .top
         label.displaced(for='input') Input
+        label.displaced(for='menu-button') Menu
         button#favorite.icon ☆
         textarea#input(
           type='text'
